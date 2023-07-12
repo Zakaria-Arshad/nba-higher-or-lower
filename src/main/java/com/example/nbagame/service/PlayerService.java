@@ -36,11 +36,14 @@ public class PlayerService {
                 throw new IllegalArgumentException("Invalid stat to check");
         }
     }
-    public int compareUserAnswer(String userAnswer, Player realAnswer, int currentPoints) {
+    public boolean compareUserAnswer(String userAnswer, Player realAnswer) {
+        System.out.println(userAnswer);
+        System.out.println(realAnswer.getName());
         if (userAnswer.equalsIgnoreCase(realAnswer.getName())) {
-            return currentPoints + 1; // Add one point for correct answer
+
+            return true; // return true if correct answer
         } else {
-            return currentPoints; // Return current points if the answer is incorrect
+            return false; // return false otherwise
         }
     }
 

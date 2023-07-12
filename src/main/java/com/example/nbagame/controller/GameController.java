@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -13,6 +15,10 @@ import java.util.List;
 public class GameController {
 
     private final PlayerService playerService;
+    private int points = 0;
+    private Player player1;
+    private Player player2;
+    private Player winner;
 
     @Autowired
     public GameController(PlayerService playerService) {
@@ -21,31 +27,47 @@ public class GameController {
 
     @GetMapping("/")
     public String playGame(Model model) {
-        // Retrieve two random players
+        // add points
+        model.addAttribute("points", points);
+        // retrieve two random players
         List<Player> playerList = playerService.randomPlayers();
-        Player player1 = playerList.get(0);
-        Player player2 = playerList.get(1);
+        player1 = playerList.get(0);
+        player2 = playerList.get(1);
 
-        // Add players to the model
+        // add players to the model
         model.addAttribute("player1", player1);
         model.addAttribute("player2", player2);
 
-        // Compare the players' stats and determine the winner
-        Player winner = playerService.compareStats(player1, player2, "points");
+        // compare the players' stats and determine the winner
+        winner = playerService.compareStats(player1, player2, "points");
 
-        // Simulate user's answer
-        String userAnswer = "Player A"; // Assuming the user entered their answer
-
-        // Compare user's answer to the real answer and update points
-        int currentPoints = 0; // Initialize currentPoints
-
-        currentPoints = playerService.compareUserAnswer(userAnswer, winner, currentPoints);
-
-        // Display currentPoints
-        model.addAttribute("points", currentPoints);
-
-        // Return the name of the HTML template to render
+        // return the name of the HTML template to render
         return "game";
     }
+
+    @PostMapping("/game/submit") // @PostMapping used for submitting data
+    public String submitAnswer(Model model, @RequestParam("answer") String userAnswer) {
+        // compare user's answer to the real answer and update points
+        boolean playerGotQuestionCorrect = playerService.compareUserAnswer(userAnswer, winner);
+
+        if (playerGotQuestionCorrect) {
+            points += 1;
+        } else {
+            return "redirect:/end";
+        }
+
+        // redirect back to game
+        return "redirect:/";
+    }
+
+    @GetMapping("/end")
+    public String endGame(Model model) {
+        // add the final points and winner to the model
+        model.addAttribute("points", points);
+
+        // return the name of the HTML template to render
+        return "game-end";
+    }
 }
+
 

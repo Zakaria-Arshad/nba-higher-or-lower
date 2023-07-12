@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>Game</h1>
+<h2>Points</h2>
+<p>Points: <span th:text="${points}"></span></p>
 <!-- Display player 1 information -->
 <h2>Player 1</h2>
 <p>Name: <span th:text="${player1.name}"></span></p>
@@ -17,6 +19,12 @@
 <p>Name: <span th:text="${player2.name}"></span></p>
 <p>Age: <span th:text="${player2.age}"></span></p>
 <p>Team: <span th:text="${player2.team}"></span></p>
+
+<!-- Form to submit user's answer -->
+<form id="answerForm" action="/game/submit" method="post">
+    <button type="submit" name="answer" th:value="${player1.name}">Player 1</button>
+    <button type="submit" name="answer" th:value="${player2.name}">Player 2</button>
+</form>
 
 </body>
 </html>

@@ -26,6 +26,10 @@ public class GameController {
         Player player1 = playerList.get(0);
         Player player2 = playerList.get(1);
 
+        // Add players to the model
+        model.addAttribute("player1", player1);
+        model.addAttribute("player2", player2);
+
         // Compare the players' stats and determine the winner
         Player winner = playerService.compareStats(player1, player2, "points");
 
@@ -41,7 +45,7 @@ public class GameController {
         model.addAttribute("points", currentPoints);
 
         // Return the name of the HTML template to render
-        return "game-result";
+        return "game";
     }
 }
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+</head>
+<body>
+<h1>Game</h1>
+<!-- Display player 1 information -->
+<h2>Player 1</h2>
+<p>Name: <span th:text="${player1.name}"></span></p>
+<p>Age: <span th:text="${player1.age}"></span></p>
+<p>Team: <span th:text="${player1.team}"></span></p>
+
+<!-- Display player 2 information -->
+<h2>Player 2</h2>
+<p>Name: <span th:text="${player2.name}"></span></p>
+<p>Age: <span th:text="${player2.age}"></span></p>
+<p>Team: <span th:text="${player2.team}"></span></p>
+
+</body>
+</html>
+

@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.io.IOException;
 import java.util.List;
 
 @SpringBootApplication
@@ -21,8 +22,15 @@ public class NBAGameApplication {
 
     private static final Logger log = LoggerFactory.getLogger(NBAGameApplication.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
+
         SpringApplication.run(NBAGameApplication.class, args);
+        openHomePage();
+    }
+
+    private static void openHomePage() throws IOException {
+        Runtime rt = Runtime.getRuntime();
+        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8080/game/start");
     }
 
     @Bean // returns a CommandLineRunner Bean that automatically runs when the application is run

@@ -21,7 +21,7 @@
 <p>Team: <span th:text="${player2.team}"></span></p>
 
 <!-- Form to submit user's answer -->
-<form id="answerForm" action="/game/submit" method="post">
+<form id="answerForm" action="/game/play/submit" method="post">
     <button type="submit" name="answer" th:value="${player1.name}">Player 1</button>
     <button type="submit" name="answer" th:value="${player2.name}">Player 2</button>
 </form>

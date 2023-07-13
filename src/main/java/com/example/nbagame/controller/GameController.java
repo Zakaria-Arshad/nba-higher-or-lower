@@ -16,6 +16,8 @@ public class GameController {
 
     private final PlayerService playerService;
     private int points = 0;
+
+    private String gameCategory;
     private Player player1;
     private Player player2;
     private Player winner;
@@ -24,8 +26,28 @@ public class GameController {
     public GameController(PlayerService playerService) {
         this.playerService = playerService;
     }
-
-    @GetMapping("/")
+    // need to add a method here for the home screen ("/start"), where user picks which game to play (points, assists, 3-pointer)
+    // this will update a private String stat that will be used for the playGame method
+    @GetMapping("/game/start")
+    public String homePage(){
+        return "game-start";
+    }
+    @PostMapping("/game/start/submit")
+    public String startGame(@RequestParam("response") String category){
+        switch(category){
+            case "points":
+                gameCategory = "points";
+                break;
+            case "assists":
+                gameCategory = "assists";
+                break;
+            case "threePtPercentage":
+                gameCategory = "threePtPercentage";
+                break;
+        }
+        return "redirect:/game/play";
+    }
+    @GetMapping("/game/play")
     public String playGame(Model model) {
         // add points
         model.addAttribute("points", points);
@@ -39,34 +61,40 @@ public class GameController {
         model.addAttribute("player2", player2);
 
         // compare the players' stats and determine the winner
-        winner = playerService.compareStats(player1, player2, "points");
+        winner = playerService.compareStats(player1, player2, gameCategory);
 
         // return the name of the HTML template to render
         return "game";
     }
 
-    @PostMapping("/game/submit") // @PostMapping used for submitting data
-    public String submitAnswer(Model model, @RequestParam("answer") String userAnswer) {
+    @PostMapping("/game/play/submit") // @PostMapping used for submitting data
+    public String submitAnswer(@RequestParam("answer") String userAnswer) {
         // compare user's answer to the real answer and update points
         boolean playerGotQuestionCorrect = playerService.compareUserAnswer(userAnswer, winner);
 
         if (playerGotQuestionCorrect) {
             points += 1;
         } else {
-            return "redirect:/end";
+            return "redirect:/game/end";
         }
 
         // redirect back to game
-        return "redirect:/";
+        return "redirect:/game/play";
     }
 
-    @GetMapping("/end")
+    @GetMapping("/game/end")
     public String endGame(Model model) {
         // add the final points and winner to the model
         model.addAttribute("points", points);
 
         // return the name of the HTML template to render
         return "game-end";
+    }
+
+    @PostMapping("/game/end/submit")
+    public String restartGame(Model model){
+        points = 0;
+        return "redirect:/game/start";
     }
 }
 

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Start</title>
+</head>
+<body>
+<h1>Start Page</h1>
+<form id="startForm" action="/game/start/submit" method="post">
+    <button type="submit" name="response" value="points">Guess higher points per game</button>
+    <button type="submit" name="response" value="assists">Guess higher assists per game</button>
+    <button type="submit" name="response" value="threePtPercentage">Guess higher three point percentage</button>
+</form>
+
+</body>
+</html>

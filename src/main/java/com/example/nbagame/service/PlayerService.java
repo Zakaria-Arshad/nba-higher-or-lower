@@ -12,12 +12,10 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
 
-    @Autowired
+    @Autowired // injects PlayerRepository into PlayerService. Ensures dependency of PlayerRepository is provided
     public PlayerService(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
-
-    // Add game logic methods below
 
     public List<Player> randomPlayers() {
         List<Player> playerList = playerRepository.findRandomPlayers();
@@ -37,10 +35,7 @@ public class PlayerService {
         }
     }
     public boolean compareUserAnswer(String userAnswer, Player realAnswer) {
-        System.out.println(userAnswer);
-        System.out.println(realAnswer.getName());
         if (userAnswer.equalsIgnoreCase(realAnswer.getName())) {
-
             return true; // return true if correct answer
         } else {
             return false; // return false otherwise

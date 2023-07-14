@@ -1,5 +1,4 @@
 # NBA Stat Showdown
-## By Zakaria Arshad
 NBA Stat Showdown is an exciting game where users can test their knowledge of NBA player statistics for the 2022/23 season. The objective is to select the NBA player with the higher value in a given statistical category among two randomly generated options. Challenge yourself to achieve the highest streak of consecutive correct answers!
 
 ## Features
@@ -17,3 +16,5 @@ NBA Stat Showdown leverages the following technologies:
 - Python and Beautiful Soup: Python is used for web scraping NBA player statistics, while Beautiful Soup library simplifies the parsing of HTML and XML documents.
 - MySQL database: The scraped data is inserted into a MySQL database, allowing for efficient storage and retrieval of player statistics.
 - Spring Data JPA: Spring Data JPA provides a convenient way to connect the game backend with the MySQL database, enabling seamless data access and manipulation.
+
+## Created by Zakaria Arshad

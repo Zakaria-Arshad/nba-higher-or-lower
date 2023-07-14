@@ -1,4 +1,5 @@
 # NBA Stat Showdown
+## By Zakaria Arshad
 NBA Stat Showdown is an exciting game where users can test their knowledge of NBA player statistics for the 2022/23 season. The objective is to select the NBA player with the higher value in a given statistical category among two randomly generated options. Challenge yourself to achieve the highest streak of consecutive correct answers!
 
 ## Features

@@ -8,12 +8,14 @@ h1 {
     text-align: center;
     font-size: 48px;
     margin-bottom: 20px;
+    color: black;
 }
 
 h2 {
     text-align: center;
     font-size: 36px;
     margin-bottom: 10px;
+    color: black;
 }
 
 p {
@@ -47,7 +49,7 @@ p {
 
 .player-box h2 {
     font-size: 24px;
-    color: black; /* Blue */
+    color: black; /* Black */
     margin-bottom: 10px;
 }
 
@@ -57,15 +59,13 @@ p {
 }
 
 .player-box span {
-    color: black; /* Blue */
+    color: black; /* Black */
 }
 
-/* Additional styles for player 1 box */
 .player-box.player1 {
     background-color: #ffb300; /* Orange */
 }
 
-/* Additional styles for player 2 box */
 .player-box.player2 {
     background-color: #ff5050; /* Red */
 }

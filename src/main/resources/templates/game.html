@@ -2,29 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/game.css}" />
     <title>Game</title>
 </head>
 <body>
-<h1>Game</h1>
-<h2>Points</h2>
-<p>Points: <span th:text="${points}"></span></p>
-<!-- Display player 1 information -->
-<h2>Player 1</h2>
-<p>Name: <span th:text="${player1.name}"></span></p>
-<p>Age: <span th:text="${player1.age}"></span></p>
-<p>Team: <span th:text="${player1.team}"></span></p>
+<div class="container">
+    <h1>Current points: <span th:text="${points}"></span></h1>
+    <h2>Choose a player:</h2>
 
-<!-- Display player 2 information -->
-<h2>Player 2</h2>
-<p>Name: <span th:text="${player2.name}"></span></p>
-<p>Age: <span th:text="${player2.age}"></span></p>
-<p>Team: <span th:text="${player2.team}"></span></p>
+    <div class="player-container">
+        <!-- Display player 1 information -->
+        <div class="player-box player1">
+            <h2>Player 1</h2>
+            <p>Name: <span th:text="${player1.name}"></span></p>
+            <p>Age: <span th:text="${player1.age}"></span></p>
+            <p>Team: <span th:text="${player1.team}"></span></p>
+        </div>
 
-<!-- Form to submit user's answer -->
-<form id="answerForm" action="/game/play/submit" method="post">
-    <button type="submit" name="answer" th:value="${player1.name}">Player 1</button>
-    <button type="submit" name="answer" th:value="${player2.name}">Player 2</button>
-</form>
+        <!-- Display player 2 information -->
+        <div class="player-box player2">
+            <h2>Player 2</h2>
+            <p>Name: <span th:text="${player2.name}"></span></p>
+            <p>Age: <span th:text="${player2.age}"></span></p>
+            <p>Team: <span th:text="${player2.team}"></span></p>
+        </div>
+    </div>
+
+    <!-- Form to submit user's answer -->
+    <form id="answerForm" action="/game/play/submit" method="post">
+        <button type="submit" name="answer" th:value="${player1.name}" class="player1-button">Player 1</button>
+        <button type="submit" name="answer" th:value="${player2.name}" class="player2-button">Player 2</button>
+    </form>
+</div>
 
 </body>
 </html>
